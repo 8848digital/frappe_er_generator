@@ -105,7 +105,30 @@ def create_graph(graph_string):
     # erd is the name of the graph
     graph = graphviz.Source(graph_string)
     graph.format = 'png'
-    graph.render('erd', view=True)
+    erd_file_path = "/tmp/erd.png"
+    graph.render(erd_file_path.replace(".png", ""), view=True)
+    # graph.render('/files/erd', view=True)
+    with open(erd_file_path, "rb") as f:
+        file_data = f.read()
+
+    file_doc = frappe.get_doc({
+        "doctype": "File",
+        "file_name": "erd.png",
+        "is_private": 0,
+        "content": file_data 
+    })
+    file_doc.insert(ignore_permissions=True)
+    frappe.db.commit()
+
+    erd_log = frappe.get_doc({
+        "doctype": "ERD Logs",
+        "erd": file_doc.file_url 
+    })
+    erd_log.insert(ignore_permissions=True)
+    frappe.db.commit()
+
+    return file_doc.file_url
+
 
 
 def get_table(data, link_list, doctypes):
