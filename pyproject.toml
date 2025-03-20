@@ -1,0 +1,13 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "frappe_er_generator"
+authors = [{name = "\"Sumit Jain\"", email = "jainmit23@gmail.com"}]
+readme = "README.md"
+dynamic = ["version", "description"]
+dependencies = [
+    # "frappe~=15.0.0" # Installed and managed by bench.
+    "graphviz==2.43.0"
+]
