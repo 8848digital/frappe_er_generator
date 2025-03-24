@@ -9,5 +9,5 @@ readme = "README.md"
 dynamic = ["version", "description"]
 dependencies = [
     # "frappe~=15.0.0" # Installed and managed by bench.
-    "graphviz==2.43.0"
+    #"graphviz==2.43.0"
 ]
